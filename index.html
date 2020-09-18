@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather Forecast</title>
+    <link rel="stylesheet" href="assets/style.css" />
+  </head>
+  <body>
+    <div id="weatherContainer">
+      <div id="loadingSpinner">
+        <img src="assets/images/cloud.svg" />
+        <span>Loading...</span>
+      </div>
+      <h1 id="city">Sydney</h1>
+      <div class="line"></div>
+      <div id="todayWeather">
+        <img id="weatherIcon" data-icon="sunny" src="assets/images/sun.svg" />
+        <div>
+          <h2 id="todayTemp">26°C</h2>
+          <p id="todayHighLow">28°C | 13°C</p>
+          <p id="todayCondition">Sunny</p>
+        </div>
+      </div>
+      <div class="line"></div>
+
+      <h2 id="weather"></h2>
+      <h1 id="temperature"></h1>
+      <div id="unitToggle">
+        <span>&deg;C </span>
+        <label id="sliderContainer">
+          <input type="checkbox" checked />
+          <div id="slider"></div>
+        </label>
+        <span> &deg;F</span>
+      </div>
+    </div>
+    <img src="assets/images/weather-footer.svg" id="bgFooter" />
+  </body>
+</html>

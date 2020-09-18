@@ -1,0 +1,393 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;500&display=swap");
+html {
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ol,
+ul {
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+  font-family: "Roboto", sans-serif;
+  color: #fff;
+  font-weight: 100;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+h1 {
+  font-size: 58px;
+  text-align: center;
+  margin: 20px 0;
+}
+
+h2 {
+  font-size: 58px;
+  font-weight: 500;
+  text-align: right;
+  line-height: 100%;
+}
+
+p {
+  text-align: center;
+}
+
+body {
+  background: rgb(161, 233, 255);
+  background: linear-gradient(
+    0deg,
+    rgba(161, 233, 255, 1) 0%,
+    rgba(21, 133, 214, 1) 100%
+  );
+  height: 100vh;
+  width: 100%;
+}
+
+#weatherContainer {
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
+  padding: 10px 30px;
+}
+
+#todayWeather {
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+}
+
+#todayWeather img {
+  width: 40%;
+}
+#todayWeather div {
+  width: 60%;
+}
+#todayHighLow {
+  text-align: right;
+  font-size: 19px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+#todayCondition {
+  font-size: 24px;
+  font-weight: 400;
+  text-align: right;
+}
+#bgFooter {
+  position: absolute;
+  bottom: 0;
+}
+#loadingSpinner {
+  display: none;
+  width: 10%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#loadingSpinner img {
+  animation: loading 2s ease-in-out infinite;
+}
+
+#weather,
+#temperature {
+  text-align: center;
+}
+
+#clearIcon {
+  animation: sunrise 1.2s 0.5s ease-in-out forwards;
+  display: none;
+}
+
+#cloudyIcon {
+  animation: drift 5s ease-in-out alternate infinite;
+  display: none;
+}
+
+#rainIcon {
+  animation: drift 4s ease-in-out alternate infinite;
+  display: none;
+}
+
+#tstormIcon {
+  animation: drift 3s ease-in-out alternate infinite;
+  display: none;
+}
+
+#snowIcon {
+  animation: drift 10s ease-in-out alternate infinite;
+  display: none;
+}
+
+#partlyCloudyIcon {
+  display: none;
+}
+.line {
+  width: 95%;
+  margin: 10px auto;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.raindrop1,
+.raindrop2,
+.raindrop3 {
+  transform-origin: center;
+}
+
+.snowflake1,
+.snowflake2,
+.snowflake3 {
+  transform-origin: top;
+}
+
+.raindrop1 {
+  animation: rain 1s 0.2s ease-in backwards infinite;
+}
+
+.raindrop2 {
+  animation: rain 1s 1s ease-in backwards infinite;
+}
+
+.raindrop3 {
+  animation: rain 1s 0.6s ease-in backwards infinite;
+}
+
+.lightning {
+  animation: flash 4s 1s ease-in backwards infinite;
+}
+
+.snowflake1 {
+  animation: snowfall 3s 0.2s ease-in backwards infinite;
+}
+
+.snowflake2 {
+  animation: snowfall 3s 2s ease-in backwards infinite;
+}
+
+.snowflake3 {
+  animation: snowfall 3s 1s ease-in backwards infinite;
+}
+
+.cloud {
+  animation: smallDrift 5s ease-in-out alternate infinite;
+}
+
+.weatherIcons {
+  width: 40%;
+  margin: auto;
+}
+
+#unitToggle {
+  text-align: center;
+  font-size: 26px;
+  line-height: 16px;
+  position: absolute;
+  bottom: 40px;
+  right: 30px;
+  display: none;
+}
+
+#sliderContainer {
+  border: 2px solid #fff;
+  border-radius: 20px;
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+  margin-bottom: -7px;
+}
+
+#sliderContainer input {
+  display: none;
+}
+
+#slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 34px;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+#slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  border-radius: 50%;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+input:checked + #slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+@keyframes sunrise {
+  0% {
+    transform: rotate(-40deg) translateX(-25em);
+    opacity: 0;
+  }
+
+  100% {
+    transform: rotate(0deg) translateX(0);
+  }
+}
+
+@keyframes slide {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(22px);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rain {
+  0% {
+    transform: scale(0);
+  }
+
+  75% {
+    transform: scale(1);
+  }
+
+  100% {
+    transform: translate(-10px, 20px);
+  }
+}
+
+@keyframes drift {
+  0% {
+    transform: translateX(-20px);
+  }
+
+  100% {
+    transform-origin: top;
+    transform: translateX(20px) rotate(-2deg);
+  }
+}
+
+@keyframes smallDrift {
+  100% {
+    transform-origin: top;
+    transform: translate(2px, -3px) rotate(-2deg);
+  }
+}
+
+@keyframes flash {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 0;
+  }
+
+  53% {
+    opacity: 1;
+  }
+
+  55% {
+    opacity: 0;
+  }
+
+  57% {
+    opacity: 1;
+  }
+
+  59% {
+    opacity: 0;
+  }
+
+  90% {
+    opacity: 0;
+  }
+
+  91% {
+    opacity: 1;
+  }
+
+  93% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes snowfall {
+  0% {
+    transform: scale(0);
+  }
+
+  50% {
+    transform: scale(1);
+  }
+
+  75% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(20px) rotate(80deg);
+    opacity: 0;
+  }
+}
+
+@keyframes loading {
+  0% {
+    transform: rotateY(0);
+  }
+
+  100% {
+    transform: rotateY(360deg);
+  }
+}
