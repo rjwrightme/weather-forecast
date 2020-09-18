@@ -52,7 +52,8 @@ h2 {
 }
 
 p {
-  text-align: center;
+  font-weight: 400;
+  font-size: 20px;
 }
 
 body {
@@ -76,13 +77,14 @@ body {
 #todayWeather {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   margin: 20px 0;
 }
 
 #todayWeather img {
   width: 40%;
 }
-#todayWeather div {
+#todayWeather #mainInfo {
   width: 60%;
 }
 #todayHighLow {
@@ -96,6 +98,12 @@ body {
   font-size: 24px;
   font-weight: 400;
   text-align: right;
+}
+
+#secondaryInfo {
+  width: 100%;
+  display: flex;
+  margin-top: 20px;
 }
 #bgFooter {
   position: absolute;
@@ -147,12 +155,22 @@ body {
 #partlyCloudyIcon {
   display: none;
 }
+.left {
+  text-align: left;
+  line-height: 40px;
+}
+.right {
+  text-align: right;
+  line-height: 40px;
+}
 .line {
   width: 95%;
   margin: 10px auto;
   border-bottom: 1px solid rgba(255, 255, 255, 0.5);
 }
-
+.width50 {
+  width: 50%;
+}
 .raindrop1,
 .raindrop2,
 .raindrop3 {

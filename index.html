@@ -16,10 +16,20 @@
       <div class="line"></div>
       <div id="todayWeather">
         <img id="weatherIcon" data-icon="sunny" src="assets/images/sun.svg" />
-        <div>
+        <div id="mainInfo">
           <h2 id="todayTemp">26°C</h2>
           <p id="todayHighLow">28°C | 13°C</p>
           <p id="todayCondition">Sunny</p>
+        </div>
+        <div id="secondaryInfo">
+          <div class="width50">
+            <p class="left">Humidity: <span id="todayHumid">80%</span></p>
+            <p class="left">UV Index: <span id="todayUV">8.1</span></p>
+          </div>
+          <div class="width50">
+            <p class="right">Wind Speed:</p>
+            <p class="right" id="todayWind">5km/h</p>
+          </div>
         </div>
       </div>
       <div class="line"></div>
