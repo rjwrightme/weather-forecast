@@ -41,7 +41,7 @@ img {
 h1 {
   font-size: 58px;
   text-align: center;
-  margin: 20px 0;
+  margin-bottom: 35px;
 }
 
 h2 {
@@ -67,11 +67,32 @@ body {
   width: 100%;
 }
 
+#topNav {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+}
+#mainMenu {
+  width: 26px;
+  height: 24px;
+  margin-right: 20px;
+  color: rgba(255, 255, 255, 0.8);
+}
+#topNav p {
+  text-align: center;
+  width: calc(100% - 103px);
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 18px;
+}
+#addLocation {
+  width: 37px;
+  margin-left: 20px;
+}
 #weatherContainer {
   width: 100%;
   max-width: 600px;
   margin: auto;
-  padding: 10px 30px;
+  padding: 0 30px;
 }
 
 #todayWeather {
@@ -155,6 +176,46 @@ body {
 #partlyCloudyIcon {
   display: none;
 }
+
+#todayUV {
+  display: inline-block;
+  background-color: #ea6868;
+  padding: 0 15px;
+  border-radius: 30px;
+  line-height: 37px;
+}
+#weekForecast {
+  display: flex;
+}
+#weekForecast .futureForecast {
+  width: 16%;
+  text-align: center;
+  font-size: 17px;
+  font-weight: 400;
+  margin: 0 2%;
+  padding: 5px 0;
+}
+#futureDetails {
+  display: flex;
+  margin-top: 35px;
+  align-items: center;
+  justify-content: center;
+}
+
+#futureDetails p {
+  font-size: 24px;
+}
+#futureTemp {
+  margin-right: 30px;
+}
+
+#futureDetails .weatherIcon {
+  width: 40px;
+  margin-right: 15px;
+}
+.futureForecast.active {
+  border-bottom: 3px solid rgba(255, 255, 255, 0.5);
+}
 .left {
   text-align: left;
   line-height: 40px;
@@ -213,11 +274,6 @@ body {
 
 .cloud {
   animation: smallDrift 5s ease-in-out alternate infinite;
-}
-
-.weatherIcons {
-  width: 40%;
-  margin: auto;
 }
 
 #unitToggle {

@@ -6,14 +6,22 @@
     <title>Weather Forecast</title>
     <link rel="stylesheet" href="assets/style.css" />
   </head>
-  <body>
+  <body class="sunny">
+    <nav id="topNav">
+      <img id="mainMenu" src="assets/images/Menu.svg" alt="Main menu" />
+      <p>Powered by Open Weather</p>
+      <img
+        id="addLocation"
+        src="assets/images/Add Location Button.svg"
+        alt="Add new location"
+      />
+    </nav>
     <div id="weatherContainer">
       <div id="loadingSpinner">
         <img src="assets/images/cloud.svg" />
         <span>Loading...</span>
       </div>
       <h1 id="city">Sydney</h1>
-      <div class="line"></div>
       <div id="todayWeather">
         <img id="weatherIcon" data-icon="sunny" src="assets/images/sun.svg" />
         <div id="mainInfo">
@@ -33,16 +41,21 @@
         </div>
       </div>
       <div class="line"></div>
-
-      <h2 id="weather"></h2>
-      <h1 id="temperature"></h1>
-      <div id="unitToggle">
-        <span>&deg;C </span>
-        <label id="sliderContainer">
-          <input type="checkbox" checked />
-          <div id="slider"></div>
-        </label>
-        <span> &deg;F</span>
+      <ul id="weekForecast">
+        <li class="futureForecast active">Mon</li>
+        <li class="futureForecast">Tue</li>
+        <li class="futureForecast">Wed</li>
+        <li class="futureForecast">Thur</li>
+        <li class="futureForecast">Fri</li>
+      </ul>
+      <div id="futureDetails">
+        <img
+          class="weatherIcon"
+          data-icon="sunny"
+          src="assets/images/sun.svg"
+        />
+        <p id="futureTemp">19°</p>
+        <p>Humidity: <span id="futureHumid">54%</span></p>
       </div>
     </div>
     <img src="assets/images/weather-footer.svg" id="bgFooter" />
