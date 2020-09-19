@@ -33,40 +33,58 @@ function renderForecast(lat, long) {
   const forecastQuery = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&exclude=minutely,hourly&units=metric&appid=${apiKey}`;
 }
 
+// Function to change the visual appearance to reflect the current weather
 function renderGraphics(weather, desc) {
+  // Remove previously added classes if any
   $("body").removeClass();
+  $("#weatherIcon").removeClass();
+
+  // Change visuals based on weather
   switch (weather) {
     case "Clouds":
       $("#bgFooter").css("fill", "#B3C7C3");
       if (desc.includes("overcast")) {
         // use cloud icon
-        $("#weatherIcon").attr({
-          src: "assets/images/cloud.svg",
-          "data-icon": "cloudy",
-        });
+        $("#weatherIcon").attr("src", "assets/images/cloud.svg");
         $("body").addClass("cloudy");
+        $("#weatherIcon").addClass("cloud");
       } else {
         // use partly cloudy icon
-        $("#weatherIcon").attr({
-          src: "assets/images/partly-cloudy.svg",
-          "data-icon": "partly-cloudy",
-        });
+        $("#weatherIcon").attr("src", "assets/images/partly-cloudy.svg");
         $("body").addClass("partlyCloudy");
       }
       break;
     case "Clear":
       $("body").addClass("sunny");
       $("#bgFooter").css("fill", "#99D9BE");
-      $("#weatherIcon").attr({
-        src: "assets/images/sun.svg",
-        "data-icon": "sunny",
-      });
+      $("#weatherIcon").attr("src", "assets/images/sun.svg");
+      break;
+    case "Rain":
+    case "Drizzle":
+      $("body").addClass("rain");
+      $("#bgFooter").css("fill", "#B3C7C3");
+      $("#weatherIcon").attr("src", "assets/images/rain.svg");
+      $("#weatherIcon").addClass("cloud");
+      break;
+    case "Thunderstorm":
+      $("body").addClass("tstorm");
+      $("#bgFooter").css("fill", "#96ABAE");
+      $("#weatherIcon").attr("src", "assets/images/thunderstorm.svg");
+      $("#weatherIcon").addClass("cloud");
+      break;
+    case "Snow":
+      $("body").addClass("cloudy");
+      $("#bgFooter").css("fill", "#B3C7C3");
+      $("#weatherIcon").attr("src", "assets/images/snow.svg");
+      $("#weatherIcon").addClass("cloud");
+      break;
+    // For all other cases, go with these cloudy defaults
     default:
+      $("#weatherIcon").attr("src", "assets/images/cloud.svg");
+      $("body").addClass("cloudy");
+      $("#bgFooter").css("fill", "#B3C7C3");
+      $("#weatherIcon").addClass("cloud");
   }
-  // change body bg
-  // change bgFooter img color
-  // change weather icons
-  // update UVI colour
 }
 
 function titleCase(str) {
