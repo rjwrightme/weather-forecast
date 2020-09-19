@@ -2,38 +2,57 @@ const apiKey = "7ce89d87b02459231922b9a81bb734f6";
 const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"];
 let forecastData;
 
-// temporarily set API call to new location Button
-$("#newCityButton").click(function (e) {
-  e.preventDefault();
-  // Show loading screen
-  loadingSpinner();
-  let cityName = $("#cityInput").val();
-  const todayQuery = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&appid=${apiKey}`;
-  $.ajax({
-    url: todayQuery,
-    method: "GET",
-  }).done(function (response) {
-    console.log(response);
-    renderToday(response);
-  });
-});
+// Local Storage Functions. checkLocalStorage() is called at the end of this file to start the application.
+function checkLocalStorage() {
+  let currentCities = localStorage.getItem("weatherCities");
+  if (currentCities === null) {
+    $("#addLocation").click();
+  } else {
+    currentCities = JSON.parse(currentCities);
+    requestToday(currentCities[0]);
+  }
+}
 
+function addLocalStorage(city) {
+  let currentCities = localStorage.getItem("weatherCities");
+  if (currentCities === null) {
+    currentCities = [];
+  } else {
+    currentCities = JSON.parse(currentCities);
+  }
+  // Add new city to the front of the array
+  currentCities.unshift(city);
+  localStorage.setItem("weatherCities", JSON.stringify(currentCities));
+}
+
+// Loading Function
 function loadingSpinner() {
   $("#addLocationModal").hide();
   $("#weatherContainer").hide();
   $("#loadingSpinner").show();
+  $("#weatherWrapper").css({ border: "none", "box-shadow": "none" });
 }
 
 function showWeather() {
   $("#loadingSpinner").hide();
   $("#addLocationModal").hide();
   $("#weatherContainer").show();
+  $("#weatherWrapper").css({
+    border: "1px solid #fff",
+    "box-shadow": "0 0 20px rgba(0, 0, 0, 0.2)",
+  });
 }
 
-function showNewCity() {
-  $("#loadingSpinner").hide();
-  $("#weatherContainer").hide();
-  $("#addLocationModal").show();
+function requestToday(cityName) {
+  // Show loading screen
+  loadingSpinner();
+  const todayQuery = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&appid=${apiKey}`;
+  $.ajax({
+    url: todayQuery,
+    method: "GET",
+  }).done(function (response) {
+    renderToday(response);
+  });
 }
 
 function renderToday(data) {
@@ -190,5 +209,25 @@ function titleCase(str) {
   return str.join(" ");
 }
 
-// Either a function or a jQuery call to toggle side menu
-// The same for the new city menu
+// Event Listeners
+// Add New City Button
+$("#newCityButton").click(function (e) {
+  e.preventDefault();
+  // Orient the top right button correctly
+  $("#addLocation").removeClass("rotate");
+  let cityName = $("#cityInput").val();
+  // Clear form field for next use
+  $("#cityInput").val("");
+  // Save new city to localStorage
+  addLocalStorage(cityName);
+  requestToday(cityName);
+});
+
+// Add New City Popup
+$("#addLocation").click(function () {
+  $("#addLocationModal").slideToggle("fast");
+  $("#addLocation").toggleClass("rotate");
+});
+
+// Start the Application with checkLocalStorage()
+checkLocalStorage();
