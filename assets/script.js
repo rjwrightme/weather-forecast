@@ -92,6 +92,7 @@ function requestForecast(lat, long) {
 }
 
 function renderForecast(data) {
+  $("#weekForecast").empty();
   // loop through the next 5 days and add elements to the DOM
   for (let i = 1; i < 6; i++) {
     const newDiv = $("<div>");
@@ -227,6 +228,37 @@ $("#newCityButton").click(function (e) {
 $("#addLocation").click(function () {
   $("#addLocationModal").slideToggle("fast");
   $("#addLocation").toggleClass("rotate");
+});
+
+// Change City Menu
+$("#mainMenu").click(function () {
+  $("#currentCitiesList").empty();
+  let currentCities = localStorage.getItem("weatherCities");
+  if (currentCities === null) {
+    $("#currentCitiesList").text(
+      "Previously selected cities will be saved here."
+    );
+  } else {
+    currentCities = JSON.parse(currentCities);
+    let newUl = $("<ul>");
+    for (let i = 0; i < currentCities.length; i++) {
+      let newLi = $("<li>");
+      $(newLi).text(currentCities[i]);
+      $(newLi).attr("data-name", currentCities[i]);
+      $(newUl).append(newLi);
+    }
+    $("#currentCitiesList").append(newUl);
+  }
+  // Show Modal Menu
+  $("#currentCitiesModal").slideToggle("fast");
+});
+
+// Change City
+$("#currentCitiesList").click(function (e) {
+  if (e.target.nodeName === "LI") {
+    $("#currentCitiesModal").slideToggle("fast");
+    requestToday($(e.target).attr("data-name"));
+  }
 });
 
 // Start the Application with checkLocalStorage()

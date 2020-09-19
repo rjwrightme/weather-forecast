@@ -134,11 +134,13 @@ body.tstorm {
 }
 #addLocationModal {
   display: none;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.2);
   padding: 40px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px;
 }
-#locationForm label {
+#locationForm label,
+#currentCitiesModal h3 {
   display: block;
   max-width: 400px;
   margin: auto;
@@ -179,7 +181,24 @@ input#cityInput:focus {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
   cursor: pointer;
 }
-
+#currentCitiesModal {
+  display: none;
+  background-color: rgba(0, 0, 0, 0.1);
+  padding: 30px 40px;
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px;
+}
+#currentCitiesModal h3 {
+  margin-bottom: 30px;
+}
+#currentCitiesModal li {
+  font-size: 27px;
+  text-align: center;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 2em;
+  cursor: pointer;
+}
 #weatherContainer {
   width: 100%;
   max-width: 600px;
