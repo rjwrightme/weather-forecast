@@ -46,23 +46,56 @@ function requestForecast(lat, long) {
     } else {
       $("#todayUV").css("background-color", "#A2D17E");
     }
-    renderForecast();
+    renderForecast(response);
   });
 }
 
-function renderForecast() {
+function renderForecast(data) {
   // loop through the next 5 days and add elements to the DOM
   for (let i = 1; i < 6; i++) {
-    const newListItem = $("<li>");
-    $(newListItem).text(timestampDay(forecastData.daily[i].dt));
-    $(newListItem).addClass("futureForecast");
-    if (i === 1) {
-      $(newListItem).addClass("active");
-      $("#futureTemp").text(Math.round(forecastData.daily[i].temp.max) + "°");
-      $("#futureHumid").text(forecastData.daily[i].humidity + "%");
+    const newDiv = $("<div>");
+    const day = $("<p>");
+    const newIcon = $("<img>");
+    const temp = $("<p>");
+    const humidity = $("<p>");
+
+    // Set Day of Week
+    $(day).text(timestampDay(data.daily[i].dt));
+    $(day).addClass("day");
+    $(newDiv).addClass("futureForecast");
+    $(temp).text(Math.round(data.daily[i].temp.max) + "°");
+    $(temp).addClass("temp");
+    $(humidity).text(`Humidity: ${data.daily[i].humidity}%`);
+    $(humidity).addClass("humidity");
+    switch (data.daily[i].weather[0].main) {
+      case "Clouds":
+        if (data.daily[i].weather[0].description.includes("overcast")) {
+          $(newIcon).attr("src", "assets/images/cloud.svg");
+        } else {
+          // use partly cloudy icon
+          $(newIcon).attr("src", "assets/images/partly-cloudy.svg");
+        }
+        break;
+      case "Clear":
+        $(newIcon).attr("src", "assets/images/sun.svg");
+        break;
+      case "Rain":
+      case "Drizzle":
+        $(newIcon).attr("src", "assets/images/rain.svg");
+        break;
+      case "Thunderstorm":
+        $(newIcon).attr("src", "assets/images/thunderstorm.svg");
+        break;
+      case "Snow":
+        $(newIcon).attr("src", "assets/images/snow.svg");
+        break;
+      default:
+        $(newIcon).attr("src", "assets/images/cloud.svg");
     }
-    $(newListItem).attr("data-index", i);
-    $("#weekForecast").append(newListItem);
+    // Append all the new elements to our newDiv
+    $(newDiv).append(day, newIcon, temp, humidity);
+    // Finally append our completed newDiv to the DOM
+    $("#weekForecast").append(newDiv);
   }
 }
 

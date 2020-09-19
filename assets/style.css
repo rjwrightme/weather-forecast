@@ -57,7 +57,7 @@ p {
 }
 
 body {
-  height: 100vh;
+  height: 100%;
   width: 100%;
 }
 body.sunny {
@@ -164,11 +164,12 @@ body.tstorm {
 #secondaryInfo {
   width: 100%;
   display: flex;
-  margin-top: 20px;
+  margin-top: 40px;
 }
 #bgFooter {
-  position: absolute;
+  position: fixed;
   bottom: 0;
+  z-index: -1;
 }
 #loadingSpinner {
   display: none;
@@ -228,16 +229,28 @@ body.tstorm {
   border-radius: 30px;
   line-height: 37px;
 }
-#weekForecast {
-  display: flex;
-}
+
 #weekForecast .futureForecast {
-  width: 16%;
-  text-align: center;
+  width: 100%;
   font-size: 17px;
   font-weight: 400;
-  margin: 0 2%;
-  padding: 5px 0;
+  margin: 25px 0;
+  display: flex;
+  align-items: center;
+}
+.futureForecast img {
+  width: 10%;
+  margin-right: 10%;
+}
+.futureForecast p.day {
+  width: 24%;
+}
+.futureForecast p.temp {
+  width: 15%;
+}
+.futureForecast p.humidity {
+  text-align: right;
+  width: 41%;
 }
 #futureDetails {
   display: flex;
@@ -257,9 +270,6 @@ body.tstorm {
   width: 40px;
   margin-right: 15px;
 }
-.futureForecast.active {
-  border-bottom: 3px solid rgba(255, 255, 255, 0.5);
-}
 .left {
   text-align: left;
   line-height: 40px;
@@ -270,7 +280,7 @@ body.tstorm {
 }
 .line {
   width: 95%;
-  margin: 10px auto;
+  margin: 35px auto;
   border-bottom: 1px solid rgba(255, 255, 255, 0.5);
 }
 .width50 {
@@ -432,5 +442,10 @@ input:checked + #slider:before {
     padding: 40px 0;
     border-radius: 80px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  }
+}
+@media (min-height: 900px) {
+  body {
+    height: 100vh;
   }
 }
