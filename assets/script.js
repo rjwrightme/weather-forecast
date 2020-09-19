@@ -1,6 +1,8 @@
 const apiKey = "7ce89d87b02459231922b9a81bb734f6";
 let cityName = "Sydney";
 const todayQuery = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&appid=${apiKey}`;
+const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"];
+let forecastData;
 
 // temporarily set API call to new location Button
 $("#addLocation").click(function () {
@@ -14,9 +16,8 @@ $("#addLocation").click(function () {
 });
 
 function renderToday(data) {
-  // Change City Name = data.name
+  // Update all the DOM elements with API data
   $("#city").text(data.name);
-  // Update all the stats
   $("#todayTemp").text(`${Math.round(data.main.temp)}°C`);
   $("#todayHighLow").text(
     `${Math.round(data.main.temp_max)}° | ${Math.round(data.main.temp_min)}°`
@@ -27,10 +28,48 @@ function renderToday(data) {
   // Call renderForecast to Update 5 day forecast names
   // Call renderGraphics to update weather visuals
   renderGraphics(data.weather[0].main, data.weather[0].description);
+  requestForecast(data.coord.lat, data.coord.lon);
 }
 
-function renderForecast(lat, long) {
+function requestForecast(lat, long) {
   const forecastQuery = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&exclude=minutely,hourly&units=metric&appid=${apiKey}`;
+  $.ajax({
+    url: forecastQuery,
+    method: "GET",
+  }).done(function (response) {
+    forecastData = response;
+    $("#todayUV").text(response.current.uvi);
+    if (response.current.uvi > 8) {
+      $("#todayUV").css("background-color", "#D26060");
+    } else if (response.current.uvi > 5) {
+      $("#todayUV").css("background-color", "#E4A23E");
+    } else {
+      $("#todayUV").css("background-color", "#A2D17E");
+    }
+    renderForecast();
+  });
+}
+
+function renderForecast() {
+  // loop through the next 5 days and add elements to the DOM
+  for (let i = 1; i < 6; i++) {
+    const newListItem = $("<li>");
+    $(newListItem).text(timestampDay(forecastData.daily[i].dt));
+    $(newListItem).addClass("futureForecast");
+    if (i === 1) {
+      $(newListItem).addClass("active");
+      $("#futureTemp").text(Math.round(forecastData.daily[i].temp.max) + "°");
+      $("#futureHumid").text(forecastData.daily[i].humidity + "%");
+    }
+    $(newListItem).attr("data-index", i);
+    $("#weekForecast").append(newListItem);
+  }
+}
+
+// Function to get Day of week from UNIX timestamp
+function timestampDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  return daysOfWeek[date.getDay()];
 }
 
 // Function to change the visual appearance to reflect the current weather
@@ -87,6 +126,7 @@ function renderGraphics(weather, desc) {
   }
 }
 
+// Function takes a string for input and returns it in Title Case Format
 function titleCase(str) {
   str = str.toLowerCase().split(" ");
   for (var i = 0; i < str.length; i++) {

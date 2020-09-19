@@ -7,51 +7,47 @@
     <link rel="stylesheet" href="assets/style.css" />
   </head>
   <body class="sunny">
-    <nav id="topNav">
-      <img id="mainMenu" src="assets/images/Menu.svg" alt="Main menu" />
-      <p>Powered by Open Weather</p>
-      <img
-        id="addLocation"
-        src="assets/images/Add Location Button.svg"
-        alt="Add new location"
-      />
-    </nav>
+    <div id="weatherWrapper">
+      <nav id="topNav">
+        <img id="mainMenu" src="assets/images/Menu.svg" alt="Main menu" />
+        <p>Powered by Open Weather</p>
+        <img
+          id="addLocation"
+          src="assets/images/Add Location Button.svg"
+          alt="Add new location"
+        />
+      </nav>
 
-    <div id="weatherContainer">
-      <div id="loadingSpinner">
-        <img src="assets/images/cloud.svg" />
-        <span>Loading...</span>
-      </div>
-      <h1 id="city"></h1>
-      <div id="todayWeather">
-        <img id="weatherIcon" />
-        <div id="mainInfo">
-          <h2 id="todayTemp"></h2>
-          <p id="todayCondition"></p>
+      <div id="weatherContainer">
+        <div id="loadingSpinner">
+          <img src="assets/images/cloud.svg" />
+          <span>Loading...</span>
         </div>
-        <div id="secondaryInfo">
-          <div class="width50">
-            <p class="left">Humidity: <span id="todayHumid"></span></p>
-            <p class="left">UV Index: <span id="todayUV"></span></p>
+        <h1 id="city"></h1>
+        <div id="todayWeather">
+          <img id="weatherIcon" />
+          <div id="mainInfo">
+            <h2 id="todayTemp"></h2>
+            <p id="todayCondition"></p>
           </div>
-          <div class="width50">
-            <p class="right">Wind: <span id="todayWind"></span></p>
-            <p class="right" id="todayHighLow"></p>
+          <div id="secondaryInfo">
+            <div class="width50">
+              <p class="left">Humidity: <span id="todayHumid"></span></p>
+              <p class="left">UVI: <span id="todayUV"></span></p>
+            </div>
+            <div class="width50">
+              <p class="right">Wind: <span id="todayWind"></span></p>
+              <p class="right" id="todayHighLow"></p>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="line"></div>
-      <ul id="weekForecast">
-        <li class="futureForecast active">Mon</li>
-        <li class="futureForecast">Tue</li>
-        <li class="futureForecast">Wed</li>
-        <li class="futureForecast">Thur</li>
-        <li class="futureForecast">Fri</li>
-      </ul>
-      <div id="futureDetails">
-        <img id="futureweatherIcon" />
-        <p id="futureTemp">19°</p>
-        <p>Humidity: <span id="futureHumid">54%</span></p>
+        <div class="line"></div>
+        <ul id="weekForecast"></ul>
+        <div id="futureDetails">
+          <img id="futureweatherIcon" />
+          <p id="futureTemp"></p>
+          <p>Humidity: <span id="futureHumid"></span></p>
+        </div>
       </div>
     </div>
     <svg
