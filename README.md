@@ -15,8 +15,8 @@ https://rjwrightme.github.io/weather-forecast/
 ## Screenshots
 
 The following images demonstrate the application functionality:
-![Sunny Weather](./assets/screenshots/sun.png)
-![Rainy Weather](./assets/screenshots/rain.png)
-![Partly Cloudy](./assets/screenshots/partly-cloudy.png)
-![Add a new City](./assets/screenshots/add-city.png)
-![View Saved Cities](./assets/screenshots/saved-cities.png)
+![Sunny Weather](./assets/images/screenshots/sun.png)
+![Rainy Weather](./assets/images/screenshots/rain.png)
+![Partly Cloudy](./assets/images/screenshots/partly-cloudy.png)
+![Add a new City](./assets/images/screenshots/add-city.png)
+![View Saved Cities](./assets/images/screenshots/saved-cities.png)
