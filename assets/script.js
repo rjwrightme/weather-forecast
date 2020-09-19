@@ -1,11 +1,14 @@
 const apiKey = "7ce89d87b02459231922b9a81bb734f6";
-let cityName = "Sydney";
-const todayQuery = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&appid=${apiKey}`;
 const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"];
 let forecastData;
 
 // temporarily set API call to new location Button
-$("#addLocation").click(function () {
+$("#newCityButton").click(function (e) {
+  e.preventDefault();
+  // Show loading screen
+  loadingSpinner();
+  let cityName = $("#cityInput").val();
+  const todayQuery = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&appid=${apiKey}`;
   $.ajax({
     url: todayQuery,
     method: "GET",
@@ -14,6 +17,24 @@ $("#addLocation").click(function () {
     renderToday(response);
   });
 });
+
+function loadingSpinner() {
+  $("#addLocationModal").hide();
+  $("#weatherContainer").hide();
+  $("#loadingSpinner").show();
+}
+
+function showWeather() {
+  $("#loadingSpinner").hide();
+  $("#addLocationModal").hide();
+  $("#weatherContainer").show();
+}
+
+function showNewCity() {
+  $("#loadingSpinner").hide();
+  $("#weatherContainer").hide();
+  $("#addLocationModal").show();
+}
 
 function renderToday(data) {
   // Update all the DOM elements with API data
@@ -47,6 +68,7 @@ function requestForecast(lat, long) {
       $("#todayUV").css("background-color", "#A2D17E");
     }
     renderForecast(response);
+    showWeather();
   });
 }
 
