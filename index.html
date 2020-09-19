@@ -17,7 +17,13 @@
           alt="Add new location"
         />
       </nav>
-
+      <div id="addLocationModal">
+        <form id="locationForm">
+          <label for="cityInput">Add a New City</label>
+          <input type="text" id="cityInput" /><br />
+          <input id="newCityButton" type="submit" value="Go!" />
+        </form>
+      </div>
       <div id="weatherContainer">
         <div id="loadingSpinner">
           <img src="assets/images/cloud.svg" />
@@ -43,11 +49,6 @@
         </div>
         <div class="line"></div>
         <div id="weekForecast"></div>
-        <!-- <div id="futureDetails">
-          <img id="futureweatherIcon" />
-          <p id="futureTemp"></p>
-          <p>Humidity: <span id="futureHumid"></span></p>
-        </div> -->
       </div>
     </div>
     <svg
@@ -58,6 +59,7 @@
       clip-rule="evenodd"
       stroke-linejoin="round"
       stroke-miterlimit="2"
+      style="fill: #99d9be"
     >
       <path
         d="M0 159.677C116.608 66.28 408.6-.001 749.996-.001c341.41 0 633.413 66.285 749.998 159.683V250H0v-90.323z"
